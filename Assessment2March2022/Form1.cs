@@ -53,11 +53,13 @@ namespace StudentAS
         }
         private void DGVAssignments_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex==deleteButtonColumnIndex)
+            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
             {
                 int selectedRowIndex = e.RowIndex;
-                this.assignments.RemoveAt(selectedRowIndex);
-
+                BindingList<Assignment> list = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
+                var item  = list[selectedRowIndex];
+                assignments.Remove(item);
+                chkCompleted_CheckedChanged(null, null);
             }
         }
 
@@ -68,7 +70,23 @@ namespace StudentAS
                 if (addForm.ShowDialog() != DialogResult.OK)
                     return;
                 assignments.Add(addForm.NewAssignment);
+                chkCompleted_CheckedChanged(null, null);
             }
+        }
+
+        void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
+        {
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
+                assignments.Where(a => a.Completed == showCompleted).ToList()
+            );
+        }
+
+        private void chkCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            if (showOnlyCompletedAssignmentsCheckBox.Checked)
+                FilterCompleted(assignments);
+            else
+                assignmentsDataGridView.DataSource = assignments;
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.assignmentsDataGridView = new System.Windows.Forms.DataGridView();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.chkCompleted = new System.Windows.Forms.CheckBox();
+            this.showOnlyCompletedAssignmentsCheckBox = new System.Windows.Forms.CheckBox();
             this.txtNextDays = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,16 +60,17 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.AddAssignmentButton_Click);
             // 
-            // chkCompleted
+            // showOnlyCompletedAssignmentsCheckBox
             // 
-            this.chkCompleted.AutoSize = true;
-            this.chkCompleted.Location = new System.Drawing.Point(907, 144);
-            this.chkCompleted.Margin = new System.Windows.Forms.Padding(4);
-            this.chkCompleted.Name = "chkCompleted";
-            this.chkCompleted.Size = new System.Drawing.Size(131, 20);
-            this.chkCompleted.TabIndex = 3;
-            this.chkCompleted.Text = "Show Completed";
-            this.chkCompleted.UseVisualStyleBackColor = true;
+            this.showOnlyCompletedAssignmentsCheckBox.AutoSize = true;
+            this.showOnlyCompletedAssignmentsCheckBox.Location = new System.Drawing.Point(907, 144);
+            this.showOnlyCompletedAssignmentsCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.showOnlyCompletedAssignmentsCheckBox.Name = "showOnlyCompletedAssignmentsCheckBox";
+            this.showOnlyCompletedAssignmentsCheckBox.Size = new System.Drawing.Size(161, 20);
+            this.showOnlyCompletedAssignmentsCheckBox.TabIndex = 3;
+            this.showOnlyCompletedAssignmentsCheckBox.Text = "Show Only Completed";
+            this.showOnlyCompletedAssignmentsCheckBox.UseVisualStyleBackColor = true;
+            this.showOnlyCompletedAssignmentsCheckBox.CheckedChanged += new System.EventHandler(this.chkCompleted_CheckedChanged);
             // 
             // txtNextDays
             // 
@@ -118,7 +119,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.txtNextDays);
-            this.Controls.Add(this.chkCompleted);
+            this.Controls.Add(this.showOnlyCompletedAssignmentsCheckBox);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.assignmentsDataGridView);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -135,7 +136,7 @@
 
         private System.Windows.Forms.DataGridView assignmentsDataGridView;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.CheckBox chkCompleted;
+        private System.Windows.Forms.CheckBox showOnlyCompletedAssignmentsCheckBox;
         private System.Windows.Forms.TextBox txtNextDays;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Label label1;
