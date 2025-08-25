@@ -15,7 +15,8 @@ namespace StudentAS
     public partial class Form1 : Form
     {
         // This is the master list for all assignments
-        private List<Assignment> assignments = new List<Assignment>();
+        private readonly BindingList<Assignment> assignments = new BindingList<Assignment>();
+        private int deleteButtonColumnIndex;
 
         public Form1()
         {
@@ -24,51 +25,50 @@ namespace StudentAS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadData(assignments);
-            dgvAssignments.DataSource = assignments;
-
-
+            InitializeAssignments();
+            BindAssignmentsDataGridView();
         }
 
-        private void LoadData(List<Assignment> assList)
+        private void InitializeAssignments()
         {
-            Assignment a = new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true);
-            Assignment a1 = new Assignment("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false);
-            Assignment a2 = new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false);
-            Assignment a3 = new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false);
-            assList.Add(a);
-            assList.Add(a1);
-            assList.Add(a2);
-            assList.Add(a3);
+            assignments.Add(new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
+            assignments.Add(new Assignment("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false));
+            assignments.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
+            assignments.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
         }
+        private void BindAssignmentsDataGridView()
+        {
+            assignmentsDataGridView.Columns.Clear();
+            assignmentsDataGridView.DataSource = assignments;
 
+            var deleteButtonColumn = new DataGridViewButtonColumn()
+            {
+                Name = "Delete",
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteButtonColumnIndex = assignmentsDataGridView.Columns.Add(deleteButtonColumn);
+
+        }
         private void DGVAssignments_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(e.ColumnIndex==deleteButtonColumnIndex)
+            {
+                int selectedRowIndex = e.RowIndex;
+                this.assignments.RemoveAt(selectedRowIndex);
 
+            }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddAssignmentButton_Click(object sender, EventArgs e)
         {
             using (var addForm = new AddAssignmentForm())
             {
-                if (addForm.ShowDialog() == DialogResult.OK)
-                {
-                    assignments.Add(addForm.NewAssignment);
-
-                    // rebind grid
-                    dgvAssignments.DataSource = null;
-                    dgvAssignments.DataSource = assignments;
-                }
+                if (addForm.ShowDialog() != DialogResult.OK)
+                    return;
+                assignments.Add(addForm.NewAssignment);
             }
-
-        }
-
-
-
-
-        private void chkCompleted_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

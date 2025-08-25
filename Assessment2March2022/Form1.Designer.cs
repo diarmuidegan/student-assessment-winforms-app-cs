@@ -28,54 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvAssignments = new System.Windows.Forms.DataGridView();
+            this.assignmentsDataGridView = new System.Windows.Forms.DataGridView();
             this.btnAdd = new System.Windows.Forms.Button();
             this.chkCompleted = new System.Windows.Forms.CheckBox();
             this.txtNextDays = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.assignmentsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvAssignments
+            // assignmentsDataGridView
             // 
-            this.dgvAssignments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAssignments.Location = new System.Drawing.Point(45, 32);
-            this.dgvAssignments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgvAssignments.Name = "dgvAssignments";
-            this.dgvAssignments.RowHeadersWidth = 51;
-            this.dgvAssignments.Size = new System.Drawing.Size(848, 364);
-            this.dgvAssignments.TabIndex = 0;
-            this.dgvAssignments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVAssignments_CellContentClick);
+            this.assignmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.assignmentsDataGridView.Location = new System.Drawing.Point(45, 32);
+            this.assignmentsDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.assignmentsDataGridView.Name = "assignmentsDataGridView";
+            this.assignmentsDataGridView.RowHeadersWidth = 51;
+            this.assignmentsDataGridView.Size = new System.Drawing.Size(848, 364);
+            this.assignmentsDataGridView.TabIndex = 0;
+            this.assignmentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVAssignments_CellContentClick);
             // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(901, 32);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(116, 43);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add Assignment";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.AddAssignmentButton_Click);
             // 
             // chkCompleted
             // 
             this.chkCompleted.AutoSize = true;
             this.chkCompleted.Location = new System.Drawing.Point(907, 144);
-            this.chkCompleted.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCompleted.Margin = new System.Windows.Forms.Padding(4);
             this.chkCompleted.Name = "chkCompleted";
             this.chkCompleted.Size = new System.Drawing.Size(131, 20);
             this.chkCompleted.TabIndex = 3;
             this.chkCompleted.Text = "Show Completed";
             this.chkCompleted.UseVisualStyleBackColor = true;
-            this.chkCompleted.CheckedChanged += new System.EventHandler(this.chkCompleted_CheckedChanged);
             // 
             // txtNextDays
             // 
             this.txtNextDays.Location = new System.Drawing.Point(1123, 180);
-            this.txtNextDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNextDays.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextDays.Name = "txtNextDays";
             this.txtNextDays.Size = new System.Drawing.Size(49, 22);
             this.txtNextDays.TabIndex = 4;
@@ -83,7 +82,7 @@
             // btnShow
             // 
             this.btnShow.Location = new System.Drawing.Point(1228, 172);
-            this.btnShow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnShow.Margin = new System.Windows.Forms.Padding(4);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(116, 38);
             this.btnShow.TabIndex = 5;
@@ -121,12 +120,12 @@
             this.Controls.Add(this.txtNextDays);
             this.Controls.Add(this.chkCompleted);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dgvAssignments);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controls.Add(this.assignmentsDataGridView);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Assignment System";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.assignmentsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,7 +133,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvAssignments;
+        private System.Windows.Forms.DataGridView assignmentsDataGridView;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.CheckBox chkCompleted;
         private System.Windows.Forms.TextBox txtNextDays;
