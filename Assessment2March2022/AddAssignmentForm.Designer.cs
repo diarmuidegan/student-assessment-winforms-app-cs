@@ -112,7 +112,7 @@
             this.chkCompleted.TabIndex = 8;
             this.chkCompleted.Text = "Completed";
             this.chkCompleted.UseVisualStyleBackColor = true;
-            this.chkCompleted.CheckedChanged += new System.EventHandler(this.chkCompleted_CheckedChanged);
+
             // 
             // btnSave
             // 
@@ -122,6 +122,8 @@
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+
             // 
             // AddAssignmentForm
             // 
@@ -140,7 +142,6 @@
             this.Controls.Add(this.txtName);
             this.Name = "AddAssignmentForm";
             this.Text = "AddAssignmentForm";
-            this.Load += new System.EventHandler(this.AddAssignmentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numPercent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

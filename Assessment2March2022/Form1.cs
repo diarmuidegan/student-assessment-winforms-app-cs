@@ -11,8 +11,12 @@ using Assessment2March2022;
 
 namespace StudentAS
 {
+
     public partial class Form1 : Form
     {
+        // This is the master list for all assignments
+        private List<Assignment> assignments = new List<Assignment>();
+
         public Form1()
         {
             InitializeComponent();
@@ -20,10 +24,9 @@ namespace StudentAS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<Assignment> assList = new List<Assignment>();
-            LoadData(assList);
-            dgvAssignments.DataSource = assList;
-           
+            LoadData(assignments);
+            dgvAssignments.DataSource = assignments;
+
 
         }
 
@@ -50,17 +53,14 @@ namespace StudentAS
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Get new assignment
-                    Assignment newAssign = addForm.NewAssignment;
+                    assignments.Add(addForm.NewAssignment);
 
-                    // Add to list
-                    assignments.Add(newAssign);
-
-                    // Refresh DataGridView
+                    // rebind grid
                     dgvAssignments.DataSource = null;
                     dgvAssignments.DataSource = assignments;
                 }
             }
+
         }
 
 
