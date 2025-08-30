@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace StudentAS
 {
-    public class Assignment
+    public class Assignment : ICloneable
     {
         public String Name { get; set; }
         public String Subject { get; set; }
@@ -23,6 +24,21 @@ namespace StudentAS
             Description = description;
             PercentCompleted = percentCompleted;
             Completed = completed;
+        }
+        public object Clone() { return Copy(); }
+
+        public Assignment Copy()
+        {
+            var assingment = new Assignment
+            {
+                Name = Name,
+                Subject = Subject,
+                Due = Due,
+                Description = Description,
+                PercentCompleted = PercentCompleted,
+                Completed = Completed
+            };
+            return assingment;
         }
     }
 }

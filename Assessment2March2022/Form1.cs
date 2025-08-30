@@ -51,18 +51,6 @@ namespace StudentAS
             deleteButtonColumnIndex = assignmentsDataGridView.Columns.Add(deleteButtonColumn);
 
         }
-        private void DGVAssignments_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
-            {
-                int selectedRowIndex = e.RowIndex;
-                BindingList<Assignment> list = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
-                var item  = list[selectedRowIndex];
-                assignments.Remove(item);
-                chkCompleted_CheckedChanged(null, null);
-            }
-        }
-
         private void AddAssignmentButton_Click(object sender, EventArgs e)
         {
             using (var addForm = new AddAssignmentForm())
@@ -70,18 +58,46 @@ namespace StudentAS
                 if (addForm.ShowDialog() != DialogResult.OK)
                     return;
                 assignments.Add(addForm.NewAssignment);
-                chkCompleted_CheckedChanged(null, null);
+                CompletedCheckBox_CheckedChanged(null, null);
             }
+        }
+        private void AssignmentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                Assignment item = GetSelectedAssignmentFromDataGridView(e);
+                assignments.Remove(item);
+                SetAssignmentsDataGridViewDataSource();
+            }
+            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Copy")
+            {
+                Assignment item = GetSelectedAssignmentFromDataGridView(e);
+                assignments.Add((Assignment)item.Clone());
+                SetAssignmentsDataGridViewDataSource();
+            }
+        }
+
+        private Assignment GetSelectedAssignmentFromDataGridView(DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = e.RowIndex;
+            BindingList<Assignment> list = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
+            var item = list[selectedRowIndex];
+            return item;
         }
 
         void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
         {
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(
-                assignments.Where(a => a.Completed == showCompleted).ToList()
+                assignmentBindingList.Where(a => a.Completed == showCompleted).ToList()
             );
         }
 
-        private void chkCompleted_CheckedChanged(object sender, EventArgs e)
+        private void CompletedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SetAssignmentsDataGridViewDataSource();
+        }
+
+        private void SetAssignmentsDataGridViewDataSource()
         {
             if (showOnlyCompletedAssignmentsCheckBox.Checked)
                 FilterCompleted(assignments);

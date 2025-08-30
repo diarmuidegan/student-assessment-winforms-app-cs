@@ -47,7 +47,7 @@
             this.assignmentsDataGridView.RowHeadersWidth = 51;
             this.assignmentsDataGridView.Size = new System.Drawing.Size(848, 364);
             this.assignmentsDataGridView.TabIndex = 0;
-            this.assignmentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVAssignments_CellContentClick);
+            this.assignmentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AssignmentsDataGridView_CellContentClick);
             // 
             // btnAdd
             // 
@@ -70,7 +70,7 @@
             this.showOnlyCompletedAssignmentsCheckBox.TabIndex = 3;
             this.showOnlyCompletedAssignmentsCheckBox.Text = "Show Only Completed";
             this.showOnlyCompletedAssignmentsCheckBox.UseVisualStyleBackColor = true;
-            this.showOnlyCompletedAssignmentsCheckBox.CheckedChanged += new System.EventHandler(this.chkCompleted_CheckedChanged);
+            this.showOnlyCompletedAssignmentsCheckBox.CheckedChanged += new System.EventHandler(this.CompletedCheckBox_CheckedChanged);
             // 
             // txtNextDays
             // 
