@@ -41,17 +41,17 @@
             // assignmentsDataGridView
             // 
             this.assignmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assignmentsDataGridView.Location = new System.Drawing.Point(45, 32);
+            this.assignmentsDataGridView.Location = new System.Drawing.Point(34, 105);
             this.assignmentsDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.assignmentsDataGridView.Name = "assignmentsDataGridView";
             this.assignmentsDataGridView.RowHeadersWidth = 51;
-            this.assignmentsDataGridView.Size = new System.Drawing.Size(848, 364);
+            this.assignmentsDataGridView.Size = new System.Drawing.Size(1309, 364);
             this.assignmentsDataGridView.TabIndex = 0;
             this.assignmentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AssignmentsDataGridView_CellContentClick);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(901, 32);
+            this.btnAdd.Location = new System.Drawing.Point(13, 13);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(116, 43);
@@ -63,7 +63,7 @@
             // showOnlyCompletedAssignmentsCheckBox
             // 
             this.showOnlyCompletedAssignmentsCheckBox.AutoSize = true;
-            this.showOnlyCompletedAssignmentsCheckBox.Location = new System.Drawing.Point(907, 144);
+            this.showOnlyCompletedAssignmentsCheckBox.Location = new System.Drawing.Point(153, 25);
             this.showOnlyCompletedAssignmentsCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.showOnlyCompletedAssignmentsCheckBox.Name = "showOnlyCompletedAssignmentsCheckBox";
             this.showOnlyCompletedAssignmentsCheckBox.Size = new System.Drawing.Size(161, 20);
@@ -74,7 +74,7 @@
             // 
             // txtNextDays
             // 
-            this.txtNextDays.Location = new System.Drawing.Point(1123, 180);
+            this.txtNextDays.Location = new System.Drawing.Point(567, 22);
             this.txtNextDays.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextDays.Name = "txtNextDays";
             this.txtNextDays.Size = new System.Drawing.Size(49, 22);
@@ -82,7 +82,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(1228, 172);
+            this.btnShow.Location = new System.Drawing.Point(672, 14);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(116, 38);
@@ -93,7 +93,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(903, 183);
+            this.label1.Location = new System.Drawing.Point(347, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 16);
@@ -103,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1181, 183);
+            this.label2.Location = new System.Drawing.Point(625, 25);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 16);
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1373, 433);
+            this.ClientSize = new System.Drawing.Size(1373, 527);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShow);
