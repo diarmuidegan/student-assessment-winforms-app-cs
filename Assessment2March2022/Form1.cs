@@ -12,14 +12,14 @@ using Assessment2March2022;
 namespace StudentAS
 {
     /// <summary>
-    /// Form for managing reciepts
+    /// Form for managing assignments
     /// </summary>
     public partial class Form1 : Form
     {
         /// <summary>
-        /// This is the master list for all reciepts
+        /// This is the master list for all assignments
         /// </summary>
-        private readonly BindingList<Reciept> _reciepts = new BindingList<Reciept>();
+        private readonly BindingList<Assignment> _assignments = new BindingList<Assignment>();
 
         /// <summary>
         /// Constructor
@@ -30,10 +30,10 @@ namespace StudentAS
         }
         #region Private Methods
         #endregion
-        private void BindRecieptsDataGridView()
+        private void BindAssignmentsDataGridView()
         {
-            recieptsDataGridView.Columns.Clear();
-            recieptsDataGridView.DataSource = _reciepts;
+            assignmentsDataGridView.Columns.Clear();
+            assignmentsDataGridView.DataSource = _assignments;
 
             var copyButtonColumn = new DataGridViewButtonColumn()
             {
@@ -42,7 +42,7 @@ namespace StudentAS
                 HeaderText = "",
                 Text = "Copy"
             };
-            _ = recieptsDataGridView.Columns.Add(copyButtonColumn);
+            _ = assignmentsDataGridView.Columns.Add(copyButtonColumn);
             var deleteButtonColumn = new DataGridViewButtonColumn()
             {
                 Name = "Delete",
@@ -50,76 +50,76 @@ namespace StudentAS
                 HeaderText = "",
                 Text = "Delete"
             };
-            _ = recieptsDataGridView.Columns.Add(deleteButtonColumn);
+            _ = assignmentsDataGridView.Columns.Add(deleteButtonColumn);
         }
 
         private static Color ChooseColor(object dataBoundItem)
         {
-            if (dataBoundItem is Reciept reciept && reciept.PercentCompleted > 0)
+            if (dataBoundItem is Assignment assignment && assignment.PercentCompleted > 0)
                 return Color.LightGreen;
 
             return Color.White;
         }
-        private Reciept GetSelectedRecieptFromDataGridView(DataGridViewCellEventArgs e)
+        private Assignment GetSelectedAssignmentFromDataGridView(DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = e.RowIndex;
-            BindingList<Reciept> list = (BindingList<Reciept>)recieptsDataGridView.DataSource;
+            BindingList<Assignment> list = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
             var item = list[selectedRowIndex];
             return item;
         }
-        // This method will filter the reciepts based on the Completed property
-        void FilterCompleted(BindingList<Reciept> recieptBindingList, bool showCompleted = true)
+        // This method will filter the assignments based on the Completed property
+        void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
         {
-            recieptsDataGridView.DataSource = new BindingList<Reciept>(
-                recieptBindingList.Where(a => a.Completed == showCompleted).ToList()
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
+                assignmentBindingList.Where(a => a.Completed == showCompleted).ToList()
             );
         }
         // This method will set the DataSource of the DataGridView based on the checkbox state
-        private void SetRecieptsDataGridViewDataSource()
+        private void SetAssignmentsDataGridViewDataSource()
         {
-            if (showOnlyCompletedRecieptsCheckBox.Checked)
-                FilterCompleted(_reciepts);
+            if (showOnlyCompletedAssignmentsCheckBox.Checked)
+                FilterCompleted(_assignments);
             else
-                recieptsDataGridView.DataSource = _reciepts;
+                assignmentsDataGridView.DataSource = _assignments;
         }
-        private void InitializeReciepts()
+        private void InitializeAssignments()
         {
-            _reciepts.Add(new Reciept("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
-            _reciepts.Add(new Reciept("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false));
-            _reciepts.Add(new Reciept("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
-            _reciepts.Add(new Reciept("Reciept 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
+            _assignments.Add(new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
+            _assignments.Add(new Assignment("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false));
+            _assignments.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
+            _assignments.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
         }
         #region Event Handlers
         #endregion
-        // This event will open the RecieptForm to add a new reciept
-        private void AddRecieptButton_Click(object sender, EventArgs e)
+        // This event will open the AssignmentForm to add a new assignment
+        private void AddAssignmentButton_Click(object sender, EventArgs e)
         {
-            using (var addForm = new RecieptForm())
+            using (var addForm = new AssignmentForm())
             {
                 if (addForm.ShowDialog() != DialogResult.OK)
                     return;
-                _reciepts.Add(addForm.Reciept);
+                _assignments.Add(addForm.Assignment);
                 CompletedCheckBox_CheckedChanged(null, null);
             }
         }
-        private void RecieptsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void AssignmentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (recieptsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
+            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
             {
-                Reciept item = GetSelectedRecieptFromDataGridView(e);
-                _reciepts.Remove(item);
-                SetRecieptsDataGridViewDataSource();
+                Assignment item = GetSelectedAssignmentFromDataGridView(e);
+                _assignments.Remove(item);
+                SetAssignmentsDataGridViewDataSource();
             }
-            if (recieptsDataGridView.Columns[e.ColumnIndex].Name == "Copy")
+            if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Copy")
             {
-                Reciept item = GetSelectedRecieptFromDataGridView(e);
-                _reciepts.Add((Reciept)item.Clone());
-                SetRecieptsDataGridViewDataSource();
+                Assignment item = GetSelectedAssignmentFromDataGridView(e);
+                _assignments.Add((Assignment)item.Clone());
+                SetAssignmentsDataGridViewDataSource();
             }
         }
         private void ResetFilters()
         {
-            showOnlyCompletedRecieptsCheckBox.Checked = false;
+            showOnlyCompletedAssignmentsCheckBox.Checked = false;
 
         }
         /// <summary>
@@ -127,26 +127,26 @@ namespace StudentAS
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RecieptsDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void AssignmentsDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            var row = recieptsDataGridView.Rows[e.RowIndex];
+            var row = assignmentsDataGridView.Rows[e.RowIndex];
             row.DefaultCellStyle.BackColor = ChooseColor(row.DataBoundItem);
         }
 
-        // This event will initialize the reciepts and bind the DataGridView when the form loads
+        // This event will initialize the assignments and bind the DataGridView when the form loads
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeReciepts();
-            BindRecieptsDataGridView();
+            InitializeAssignments();
+            BindAssignmentsDataGridView();
         }
 
         // This event will trigger when the checkbox is checked or unchecked
         private void CompletedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            SetRecieptsDataGridViewDataSource();
+            SetAssignmentsDataGridViewDataSource();
         }
 
-        // This event will filter the reciepts when the Show button is clicked
+        // This event will filter the assignments when the Show button is clicked
         private void ShowButton_Click(object sender, EventArgs e)
         {
             int days = (int)daysNumericUpDown.Value;
@@ -154,8 +154,8 @@ namespace StudentAS
             DateTime now = DateTime.Now;
             DateTime targetDate = now.AddDays(days);
 
-            var filtered = _reciepts.Where(a => a.Due >= now && a.Due <= targetDate).ToList();
-            recieptsDataGridView.DataSource = new BindingList<Reciept>(filtered);
+            var filtered = _assignments.Where(a => a.Due >= now && a.Due <= targetDate).ToList();
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(filtered);
         }
 
         // This event will reset the filters when the Reset Filters button is clicked
@@ -166,12 +166,12 @@ namespace StudentAS
 
         private void sortButton_Click(object sender, EventArgs e)
         {
-            // Get the currently displayed reciepts
-            var displayedReciepts = (BindingList<Reciept>)recieptsDataGridView.DataSource;
+            // Get the currently displayed assignments
+            var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
             // Set the DataSource to a new sorted BindingList
-            recieptsDataGridView.DataSource = new BindingList<Reciept>(
-                displayedReciepts.OrderBy( // Sort by 
-                    (reciept) => reciept.Due // The Sort delegate, sorting by Due
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
+                displayedAssignments.OrderBy( // Sort by 
+                    (assignment) => assignment.Due // The Sort delegate, sorting by Due
                     )
                 .ToList() // Convert to List
                 );
@@ -180,35 +180,35 @@ namespace StudentAS
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            var displayedReciepts = (BindingList<Reciept>)recieptsDataGridView.DataSource;
+            var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
 
             // Replace 'OrderByDescending' with the correct control name, e.g. 'orderByDescendingCheckBox'
             // Make sure you have a CheckBox control named 'orderByDescendingCheckBox' in your designer
 
-            List<Reciept> sortedList;
+            List<Assignment> sortedList;
 
             if (OrderByDescending.Checked)
             {
-                sortedList = displayedReciepts.OrderByDescending(x => x.Name).ToList();
+                sortedList = displayedAssignments.OrderByDescending(x => x.Name).ToList();
             }
             else
             {
-                sortedList = displayedReciepts.OrderBy(x => x.Name).ToList();
+                sortedList = displayedAssignments.OrderBy(x => x.Name).ToList();
             }
 
-            recieptsDataGridView.DataSource = new BindingList<Reciept>(sortedList);
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(sortedList);
         }
 
 
         // Sort by Name button click event handler
         private void button1_Click(object sender, EventArgs e)
         {
-            // Get the currently displayed reciepts
-            var displayedReciepts = (BindingList<Reciept>)recieptsDataGridView.DataSource;
+            // Get the currently displayed assignments
+            var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
             // Set the DataSource to a new sorted BindingList
-            recieptsDataGridView.DataSource = new BindingList<Reciept>(
-                displayedReciepts.OrderBy( // Sort by 
-                    (reciept) => reciept.Name // The Sort delegate, sorting by Due
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
+                displayedAssignments.OrderBy( // Sort by 
+                    (assignment) => assignment.Name // The Sort delegate, sorting by Due
                     )
                 .ToList() // Convert to List
                 );
