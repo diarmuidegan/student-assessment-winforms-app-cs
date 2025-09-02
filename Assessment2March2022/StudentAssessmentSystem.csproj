@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddAssignmentForm.cs">
+    <Compile Include="AssignmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddAssignmentForm.Designer.cs">
-      <DependentUpon>AddAssignmentForm.cs</DependentUpon>
+    <Compile Include="AssignmentForm.Designer.cs">
+      <DependentUpon>AssignmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Assignment.cs" />
     <Compile Include="Form1.cs">
@@ -61,8 +61,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddAssignmentForm.resx">
-      <DependentUpon>AddAssignmentForm.cs</DependentUpon>
+    <EmbeddedResource Include="AssignmentForm.resx">
+      <DependentUpon>AssignmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
