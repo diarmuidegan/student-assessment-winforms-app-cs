@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using StudentAS;
 
 namespace Assessment2March2022
@@ -19,12 +11,22 @@ namespace Assessment2March2022
         /// </summary>
         public Assignment Assignment { get; private set; }
 
+        /// <summary>
+        /// Initializes the AssignmentForm.
+        /// Depends on a Control on the Form called AssignmentForm.
+        /// </summary>
         public AssignmentForm()
         {
             InitializeComponent();
         }
         #region Methods
         #endregion
+        /// <summary>
+        /// Saves the assignment and closes the form.
+        /// Depends on methods <see cref="CreateNewAssigmentFromFields"/>.
+        /// Depends on fields <see cref="Assignment"/>.
+        /// Depends on a Control on the Form called AssignmentForm.
+        /// </summary>
         private void SaveAssignmentAndClose()
         {
             CreateNewAssigmentFromFields();
@@ -33,6 +35,12 @@ namespace Assessment2March2022
             Close();
         }
 
+        /// <summary>
+        /// Creates a new Assignment from form fields.
+        /// Depends on Property <see cref="Assignment"/>.
+        /// Depends on Class <cee cref="Assignment"/>.
+        /// Depends on Controls on the Form called txtName, txtSubject, dtpDueDate, txtDescription, numPercent, chkCompleted.
+        /// </summary>
         private void CreateNewAssigmentFromFields()
         {
             Assignment = new Assignment
@@ -47,6 +55,11 @@ namespace Assessment2March2022
         }
         #region Event Handlers
         #endregion
+        /// <summary>
+        /// Handles the Save button click event.
+        /// Depends on methods <see cref="SaveAssignmentAndClose"/>.
+        /// Depends on a Control on the Form called btnSave.
+        /// </summary>
         private void BtnSave_Click(object sender, EventArgs e)
         {
             SaveAssignmentAndClose();

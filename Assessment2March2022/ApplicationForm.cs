@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assessment2March2022;
 
@@ -14,7 +12,7 @@ namespace StudentAS
     /// <summary>
     /// Form for managing assignments
     /// </summary>
-    public partial class Form1 : Form
+    public partial class ApplicationForm : Form
     {
         /// <summary>
         /// This is the master list for all assignments
@@ -24,7 +22,7 @@ namespace StudentAS
         /// <summary>
         /// Constructor
         /// </summary>
-        public Form1()
+        public ApplicationForm()
         {
             InitializeComponent();
         }
