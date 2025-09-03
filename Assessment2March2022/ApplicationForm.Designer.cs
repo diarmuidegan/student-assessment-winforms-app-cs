@@ -38,7 +38,7 @@
             this.resetFiltersButton = new System.Windows.Forms.Button();
             this.dueFilterGroupBox = new System.Windows.Forms.GroupBox();
             this.sortButton = new System.Windows.Forms.Button();
-            this.OrderByDescending = new System.Windows.Forms.CheckBox();
+            this.sortDueByCheckedDirectionCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.assignmentsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
@@ -157,7 +157,7 @@
             // 
             // sortButton
             // 
-            this.sortButton.Location = new System.Drawing.Point(1088, 38);
+            this.sortButton.Location = new System.Drawing.Point(1108, 36);
             this.sortButton.Name = "sortButton";
             this.sortButton.Size = new System.Drawing.Size(143, 23);
             this.sortButton.TabIndex = 11;
@@ -165,35 +165,35 @@
             this.sortButton.UseVisualStyleBackColor = true;
             this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
             // 
-            // OrderByDescending
+            // sortDueByCheckedDirectionCheckBox
             // 
-            this.OrderByDescending.AutoSize = true;
-            this.OrderByDescending.Location = new System.Drawing.Point(943, 36);
-            this.OrderByDescending.Margin = new System.Windows.Forms.Padding(4);
-            this.OrderByDescending.Name = "OrderByDescending";
-            this.OrderByDescending.Size = new System.Drawing.Size(152, 20);
-            this.OrderByDescending.TabIndex = 12;
-            this.OrderByDescending.Text = "OrderByDescending";
-            this.OrderByDescending.UseVisualStyleBackColor = true;
-            this.OrderByDescending.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.sortDueByCheckedDirectionCheckBox.AutoSize = true;
+            this.sortDueByCheckedDirectionCheckBox.Location = new System.Drawing.Point(943, 36);
+            this.sortDueByCheckedDirectionCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.sortDueByCheckedDirectionCheckBox.Name = "sortDueByCheckedDirectionCheckBox";
+            this.sortDueByCheckedDirectionCheckBox.Size = new System.Drawing.Size(158, 20);
+            this.sortDueByCheckedDirectionCheckBox.TabIndex = 12;
+            this.sortDueByCheckedDirectionCheckBox.Text = "Order By Descending";
+            this.sortDueByCheckedDirectionCheckBox.UseVisualStyleBackColor = true;
+            this.sortDueByCheckedDirectionCheckBox.CheckedChanged += new System.EventHandler(this.SortDueByCheckedDirectionCheckBox_CheckedChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1088, 67);
+            this.button1.Location = new System.Drawing.Point(1108, 65);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(143, 23);
             this.button1.TabIndex = 13;
             this.button1.Text = "Sort By Name";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.SortByNameAscendingButton_Click);
             // 
-            // Form1
+            // ApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1373, 527);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.OrderByDescending);
+            this.Controls.Add(this.sortDueByCheckedDirectionCheckBox);
             this.Controls.Add(this.sortButton);
             this.Controls.Add(this.dueFilterGroupBox);
             this.Controls.Add(this.resetFiltersButton);
@@ -202,7 +202,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.assignmentsDataGridView);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "ApplicationForm";
             this.Text = "Assignment System";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.assignmentsDataGridView)).EndInit();
@@ -226,7 +226,7 @@
         private System.Windows.Forms.Button resetFiltersButton;
         private System.Windows.Forms.GroupBox dueFilterGroupBox;
         private System.Windows.Forms.Button sortButton;
-        private System.Windows.Forms.CheckBox OrderByDescending;
+        private System.Windows.Forms.CheckBox sortDueByCheckedDirectionCheckBox;
         private System.Windows.Forms.Button button1;
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.txtSubject = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.AssignmentName = new System.Windows.Forms.Label();
@@ -37,16 +37,16 @@
             this.dtpDueDate = new System.Windows.Forms.DateTimePicker();
             this.numPercent = new System.Windows.Forms.NumericUpDown();
             this.chkCompleted = new System.Windows.Forms.CheckBox();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numPercent)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(333, 73);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 22);
-            this.txtName.TabIndex = 0;
+            this.nameTextBox.Location = new System.Drawing.Point(333, 73);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(100, 22);
+            this.nameTextBox.TabIndex = 0;
             // 
             // txtSubject
             // 
@@ -112,25 +112,23 @@
             this.chkCompleted.TabIndex = 8;
             this.chkCompleted.Text = "Completed";
             this.chkCompleted.UseVisualStyleBackColor = true;
-
             // 
-            // btnSave
+            // saveButton
             // 
-            this.btnSave.Location = new System.Drawing.Point(595, 415);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 9;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-
+            this.saveButton.Location = new System.Drawing.Point(595, 415);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 9;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // AddAssignmentForm
+            // AssignmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.chkCompleted);
             this.Controls.Add(this.numPercent);
             this.Controls.Add(this.dtpDueDate);
@@ -139,8 +137,8 @@
             this.Controls.Add(this.AssignmentName);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtSubject);
-            this.Controls.Add(this.txtName);
-            this.Name = "AddAssignmentForm";
+            this.Controls.Add(this.nameTextBox);
+            this.Name = "AssignmentForm";
             this.Text = "AddAssignmentForm";
             ((System.ComponentModel.ISupportInitialize)(this.numPercent)).EndInit();
             this.ResumeLayout(false);
@@ -150,7 +148,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.TextBox txtSubject;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label AssignmentName;
@@ -159,6 +157,6 @@
         private System.Windows.Forms.DateTimePicker dtpDueDate;
         private System.Windows.Forms.NumericUpDown numPercent;
         private System.Windows.Forms.CheckBox chkCompleted;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button saveButton;
     }
 }

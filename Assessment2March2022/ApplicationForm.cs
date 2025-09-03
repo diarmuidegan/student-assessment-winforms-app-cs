@@ -27,6 +27,7 @@ namespace StudentAS
             InitializeComponent();
         }
         #region Private Methods
+        #endregion
         /// <summary>
         /// Binds assignments to the DataGridView.
         /// Depends on field <see cref="_assignmentsBindingList"/>.
@@ -56,16 +57,15 @@ namespace StudentAS
         }
 
         /// <summary>
-        /// Chooses row color based on assignment completion.
+        /// Filters assignments by Completed property.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
         /// </summary>
-        private static Color ChooseColor(object dataBoundItem)
+        private void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
         {
-            if (dataBoundItem is Assignment assignment && assignment.PercentCompleted > 0)
-                return Color.LightGreen;
-
-            return Color.White;
+            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
+                assignmentBindingList.Where(a => a.Completed == showCompleted).ToList()
+            );
         }
-
         /// <summary>
         /// Gets the selected Assignment from the DataGridView.
         /// Depends on field <see cref="_assignmentsBindingList"/>.
@@ -78,18 +78,14 @@ namespace StudentAS
             var item = list[selectedRowIndex];
             return item;
         }
-
         /// <summary>
-        /// Filters assignments by Completed property.
-        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// Resets the completed assignments filter.
+        /// Depends on a Control on the Form called showOnlyCompletedAssignmentsCheckBox.
         /// </summary>
-        void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
+        private void ResetFilters()
         {
-            assignmentsDataGridView.DataSource = new BindingList<Assignment>(
-                assignmentBindingList.Where(a => a.Completed == showCompleted).ToList()
-            );
+            showOnlyCompletedAssignmentsCheckBox.Checked = false;
         }
-
         /// <summary>
         /// Sets DataGridView source based on checkbox.
         /// Depends on methods <see cref="FilterCompleted"/>.
@@ -103,10 +99,10 @@ namespace StudentAS
             else
                 assignmentsDataGridView.DataSource = _assignmentsBindingList;
         }
-
         /// <summary>
         /// Initializes the assignments list.
         /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on Class <cee cref="StudentAS.Assignment"/>.
         /// </summary>
         private void InitializeAssignments()
         {
@@ -115,8 +111,22 @@ namespace StudentAS
             _assignmentsBindingList.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
             _assignmentsBindingList.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
         }
+        #region Static Methods
         #endregion
+        /// <summary>
+        /// Chooses row color based on assignment completion.
+        /// Depends on Class <cee cref="StudentAS.Assignment"/>.
+        /// </summary>
+        private static Color ChooseColor(object dataBoundItem)
+        {
+            if (dataBoundItem is Assignment assignment && assignment.PercentCompleted > 0)
+                return Color.LightGreen;
+
+            return Color.White;
+        }
+
         #region Event Handlers
+        #endregion
         /// <summary>
         /// Event handler for cell content click in the DataGridView.
         /// Depends on methods <see cref="GetSelectedAssignmentFromDataGridView"/> and <see cref="SetAssignmentsDataGridViewDataSource"/>.
@@ -153,14 +163,7 @@ namespace StudentAS
             }
         }
 
-        /// <summary>
-        /// Resets the completed assignments filter.
-        /// Depends on a Control on the Form called showOnlyCompletedAssignmentsCheckBox.
-        /// </summary>
-        private void ResetFilters()
-        {
-            showOnlyCompletedAssignmentsCheckBox.Checked = false;
-        }
+
 
         /// <summary>
         /// Colors rows based on PercentCompleted.
@@ -238,19 +241,15 @@ namespace StudentAS
         /// Sorts assignments by name, ascending or descending.
         /// Depends on a Control on the Form called assignmentsDataGridView.
         /// </summary>
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void SortDueByCheckedDirectionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
             List<Assignment> sortedList;
 
-            if (OrderByDescending.Checked)
-            {
-                sortedList = displayedAssignments.OrderByDescending(x => x.Name).ToList();
-            }
+            if (sortDueByCheckedDirectionCheckBox.Checked)
+                sortedList = displayedAssignments.OrderByDescending(assignment => assignment.Due).ToList();
             else
-            {
-                sortedList = displayedAssignments.OrderBy(x => x.Name).ToList();
-            }
+                sortedList = displayedAssignments.OrderBy(assignment => assignment.Due).ToList();
 
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(sortedList);
         }
@@ -258,8 +257,9 @@ namespace StudentAS
         /// <summary>
         /// Sorts assignments by name.
         /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// Depends on a Class <cee cref="StudentAS.Assignment"/>.
         /// </summary>
-        private void button1_Click(object sender, EventArgs e)
+        private void SortByNameAscendingButton_Click(object sender, EventArgs e)
         {
             // Get the currently displayed assignments
             var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
@@ -271,6 +271,5 @@ namespace StudentAS
                 .ToList() // Convert to List
                 );
         }
-        #endregion
     }
 }
