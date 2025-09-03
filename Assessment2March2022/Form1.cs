@@ -29,7 +29,11 @@ namespace StudentAS
             InitializeComponent();
         }
         #region Private Methods
-        #endregion
+        /// <summary>
+        /// Binds assignments to the DataGridView.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void BindAssignmentsDataGridView()
         {
             assignmentsDataGridView.Columns.Clear();
@@ -53,6 +57,9 @@ namespace StudentAS
             _ = assignmentsDataGridView.Columns.Add(deleteButtonColumn);
         }
 
+        /// <summary>
+        /// Chooses row color based on assignment completion.
+        /// </summary>
         private static Color ChooseColor(object dataBoundItem)
         {
             if (dataBoundItem is Assignment assignment && assignment.PercentCompleted > 0)
@@ -62,12 +69,10 @@ namespace StudentAS
         }
 
         /// <summary>
-        /// Gets the selected Assignment from the DataGridView based on the event args.
-        /// Depends on field <see cref="_assignmentsBindingList"/> 
-        /// Depends on a Control on the Form called assignmentsDataGridView."/>
+        /// Gets the selected Assignment from the DataGridView.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
         /// </summary>
-        /// <param name="e">Event args from DataGridView event</param>
-        /// <returns></returns>
         private Assignment GetSelectedAssignmentFromDataGridView(DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = e.RowIndex;
@@ -75,14 +80,24 @@ namespace StudentAS
             var item = list[selectedRowIndex];
             return item;
         }
-        // This method will filter the assignments based on the Completed property
+
+        /// <summary>
+        /// Filters assignments by Completed property.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         void FilterCompleted(BindingList<Assignment> assignmentBindingList, bool showCompleted = true)
         {
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(
                 assignmentBindingList.Where(a => a.Completed == showCompleted).ToList()
             );
         }
-        // This method will set the DataSource of the DataGridView based on the checkbox state
+
+        /// <summary>
+        /// Sets DataGridView source based on checkbox.
+        /// Depends on methods <see cref="FilterCompleted"/>.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void SetAssignmentsDataGridViewDataSource()
         {
             if (showOnlyCompletedAssignmentsCheckBox.Checked)
@@ -90,6 +105,11 @@ namespace StudentAS
             else
                 assignmentsDataGridView.DataSource = _assignmentsBindingList;
         }
+
+        /// <summary>
+        /// Initializes the assignments list.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// </summary>
         private void InitializeAssignments()
         {
             _assignmentsBindingList.Add(new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
@@ -97,19 +117,8 @@ namespace StudentAS
             _assignmentsBindingList.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
             _assignmentsBindingList.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
         }
-        #region Event Handlers
         #endregion
-        // This event will open the AssignmentForm to add a new assignment
-        private void AddAssignmentButton_Click(object sender, EventArgs e)
-        {
-            using (var addForm = new AssignmentForm())
-            {
-                if (addForm.ShowDialog() != DialogResult.OK)
-                    return;
-                _assignmentsBindingList.Add(addForm.Assignment);
-                CompletedCheckBox_CheckedChanged(null, null);
-            }
-        }
+        #region Event Handlers
         /// <summary>
         /// Event handler for cell content click in the DataGridView.
         /// Depends on methods <see cref="GetSelectedAssignmentFromDataGridView"/> and <see cref="SetAssignmentsDataGridViewDataSource"/>.
@@ -129,36 +138,67 @@ namespace StudentAS
                 SetAssignmentsDataGridViewDataSource();
             }
         }
+
+        /// <summary>
+        /// Adds a new assignment using AssignmentForm.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on method <see cref="CompletedCheckBox_CheckedChanged"/>.
+        /// </summary>
+        private void AddAssignmentButton_Click(object sender, EventArgs e)
+        {
+            using (var addForm = new AssignmentForm())
+            {
+                if (addForm.ShowDialog() != DialogResult.OK)
+                    return;
+                _assignmentsBindingList.Add(addForm.Assignment);
+                CompletedCheckBox_CheckedChanged(null, null);
+            }
+        }
+
+        /// <summary>
+        /// Resets the completed assignments filter.
+        /// Depends on a Control on the Form called showOnlyCompletedAssignmentsCheckBox.
+        /// </summary>
         private void ResetFilters()
         {
             showOnlyCompletedAssignmentsCheckBox.Checked = false;
-
         }
+
         /// <summary>
-        /// This event will color the rows based on PercentCompleted
+        /// Colors rows based on PercentCompleted.
+        /// Depends on method <see cref="ChooseColor"/>.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void AssignmentsDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             var row = assignmentsDataGridView.Rows[e.RowIndex];
             row.DefaultCellStyle.BackColor = ChooseColor(row.DataBoundItem);
         }
 
-        // This event will initialize the assignments and bind the DataGridView when the form loads
+        /// <summary>
+        /// Loads assignments and binds DataGridView.
+        /// Depends on methods <see cref="InitializeAssignments"/> and <see cref="BindAssignmentsDataGridView"/>.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeAssignments();
             BindAssignmentsDataGridView();
         }
 
-        // This event will trigger when the checkbox is checked or unchecked
+        /// <summary>
+        /// Updates DataGridView when completed checkbox changes.
+        /// Depends on method <see cref="SetAssignmentsDataGridViewDataSource"/>.
+        /// </summary>
         private void CompletedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             SetAssignmentsDataGridViewDataSource();
         }
 
-        // This event will filter the assignments when the Show button is clicked
+        /// <summary>
+        /// Filters assignments by due date.
+        /// Depends on field <see cref="_assignmentsBindingList"/>.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void ShowButton_Click(object sender, EventArgs e)
         {
             int days = (int)daysNumericUpDown.Value;
@@ -170,12 +210,19 @@ namespace StudentAS
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(filtered);
         }
 
-        // This event will reset the filters when the Reset Filters button is clicked
+        /// <summary>
+        /// Resets filters when button clicked.
+        /// Depends on method <see cref="ResetFilters"/>.
+        /// </summary>
         private void ResetFiltersButton_Click(object sender, EventArgs e)
         {
             ResetFilters();
         }
 
+        /// <summary>
+        /// Sorts assignments by due date.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void sortButton_Click(object sender, EventArgs e)
         {
             // Get the currently displayed assignments
@@ -189,14 +236,13 @@ namespace StudentAS
                 );
         }
 
-
+        /// <summary>
+        /// Sorts assignments by name, ascending or descending.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             var displayedAssignments = (BindingList<Assignment>)assignmentsDataGridView.DataSource;
-
-            // Replace 'OrderByDescending' with the correct control name, e.g. 'orderByDescendingCheckBox'
-            // Make sure you have a CheckBox control named 'orderByDescendingCheckBox' in your designer
-
             List<Assignment> sortedList;
 
             if (OrderByDescending.Checked)
@@ -211,8 +257,10 @@ namespace StudentAS
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(sortedList);
         }
 
-
-        // Sort by Name button click event handler
+        /// <summary>
+        /// Sorts assignments by name.
+        /// Depends on a Control on the Form called assignmentsDataGridView.
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             // Get the currently displayed assignments
@@ -225,5 +273,6 @@ namespace StudentAS
                 .ToList() // Convert to List
                 );
         }
+        #endregion
     }
 }
