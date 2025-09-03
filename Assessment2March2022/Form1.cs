@@ -60,6 +60,14 @@ namespace StudentAS
 
             return Color.White;
         }
+
+        /// <summary>
+        /// Gets the selected Assignment from the DataGridView based on the event args.
+        /// Depends on field <see cref="_assignmentsBindingList"/> 
+        /// Depends on a Control on the Form called assignmentsDataGridView."/>
+        /// </summary>
+        /// <param name="e">Event args from DataGridView event</param>
+        /// <returns></returns>
         private Assignment GetSelectedAssignmentFromDataGridView(DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = e.RowIndex;
@@ -104,7 +112,7 @@ namespace StudentAS
         }
         /// <summary>
         /// Event handler for cell content click in the DataGridView.
-        /// Depends on <see cref="GetSelectedAssignmentFromDataGridView"/> and <see cref="SetAssignmentsDataGridViewDataSource"/>.
+        /// Depends on methods <see cref="GetSelectedAssignmentFromDataGridView"/> and <see cref="SetAssignmentsDataGridViewDataSource"/>.
         /// </summary>
         private void AssignmentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
