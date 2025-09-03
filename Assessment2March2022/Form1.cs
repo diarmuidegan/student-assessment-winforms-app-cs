@@ -19,7 +19,7 @@ namespace StudentAS
         /// <summary>
         /// This is the master list for all assignments
         /// </summary>
-        private readonly BindingList<Assignment> _assignments = new BindingList<Assignment>();
+        private readonly BindingList<Assignment> _assignmentsBindingList = new BindingList<Assignment>();
 
         /// <summary>
         /// Constructor
@@ -33,7 +33,7 @@ namespace StudentAS
         private void BindAssignmentsDataGridView()
         {
             assignmentsDataGridView.Columns.Clear();
-            assignmentsDataGridView.DataSource = _assignments;
+            assignmentsDataGridView.DataSource = _assignmentsBindingList;
 
             var copyButtonColumn = new DataGridViewButtonColumn()
             {
@@ -78,16 +78,16 @@ namespace StudentAS
         private void SetAssignmentsDataGridViewDataSource()
         {
             if (showOnlyCompletedAssignmentsCheckBox.Checked)
-                FilterCompleted(_assignments);
+                FilterCompleted(_assignmentsBindingList);
             else
-                assignmentsDataGridView.DataSource = _assignments;
+                assignmentsDataGridView.DataSource = _assignmentsBindingList;
         }
         private void InitializeAssignments()
         {
-            _assignments.Add(new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
-            _assignments.Add(new Assignment("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false));
-            _assignments.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
-            _assignments.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
+            _assignmentsBindingList.Add(new Assignment("lab 1", "Applications Development", DateTime.Now.AddDays(-30), "mostly done in class - go to class", 100, true));
+            _assignmentsBindingList.Add(new Assignment("Group Project", "Applications Development", DateTime.Now.AddDays(30), "book club", 40, false));
+            _assignmentsBindingList.Add(new Assignment("lab 1", "Software Development", DateTime.Now.AddDays(8), "mostly done in class - go to class", 60, false));
+            _assignmentsBindingList.Add(new Assignment("Assignment 1", "Database Module", DateTime.Now.AddDays(10), "create a database etc", 10, false));
         }
         #region Event Handlers
         #endregion
@@ -98,22 +98,26 @@ namespace StudentAS
             {
                 if (addForm.ShowDialog() != DialogResult.OK)
                     return;
-                _assignments.Add(addForm.Assignment);
+                _assignmentsBindingList.Add(addForm.Assignment);
                 CompletedCheckBox_CheckedChanged(null, null);
             }
         }
+        /// <summary>
+        /// Event handler for cell content click in the DataGridView.
+        /// Depends on <see cref="GetSelectedAssignmentFromDataGridView"/> and <see cref="SetAssignmentsDataGridViewDataSource"/>.
+        /// </summary>
         private void AssignmentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Delete")
             {
                 Assignment item = GetSelectedAssignmentFromDataGridView(e);
-                _assignments.Remove(item);
+                _assignmentsBindingList.Remove(item);
                 SetAssignmentsDataGridViewDataSource();
             }
             if (assignmentsDataGridView.Columns[e.ColumnIndex].Name == "Copy")
             {
                 Assignment item = GetSelectedAssignmentFromDataGridView(e);
-                _assignments.Add((Assignment)item.Clone());
+                _assignmentsBindingList.Add((Assignment)item.Clone());
                 SetAssignmentsDataGridViewDataSource();
             }
         }
@@ -154,7 +158,7 @@ namespace StudentAS
             DateTime now = DateTime.Now;
             DateTime targetDate = now.AddDays(days);
 
-            var filtered = _assignments.Where(a => a.Due >= now && a.Due <= targetDate).ToList();
+            var filtered = _assignmentsBindingList.Where(a => a.Due >= now && a.Due <= targetDate).ToList();
             assignmentsDataGridView.DataSource = new BindingList<Assignment>(filtered);
         }
 
